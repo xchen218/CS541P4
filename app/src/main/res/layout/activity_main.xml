@@ -16,20 +16,29 @@
             <TabWidget
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:gravity=""/>
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <LinearLayout
+
+                <com.xchen218.cs541p4.TimeView
                     android:id="@+id/tabTime"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvTime"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textSize="80sp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"/>
 
-                </LinearLayout>
+                </com.xchen218.cs541p4.TimeView>
 
                 <LinearLayout
                     android:id="@+id/tabAlarm"

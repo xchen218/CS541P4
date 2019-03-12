@@ -167,10 +167,51 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:textAppearanceLarge"/>
-
-
                     </LinearLayout>
 
+                    <ListView
+                        android:id="@+id/lvTimeList"
+                        android:layout_weight="1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp">
+                    </ListView>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:id="@+id/btnSWStart"
+                            android:text="@string/Start"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+                        <Button
+                            android:id="@+id/btnSWPause"
+                            android:text="@string/Pause"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+                        <Button
+                            android:id="@+id/btnSWResume"
+                            android:text="@string/Resume"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+                        <Button
+                            android:id="@+id/btnSWLap"
+                            android:text="@string/Lap"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+                        <Button
+                            android:id="@+id/btnSWReset"
+                            android:text="@string/Reset"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
                 </com.xchen218.cs541p4.StopWatchView>
 
                 <LinearLayout

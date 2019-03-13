@@ -26,7 +26,16 @@ public class StopWatchView extends LinearLayout {
 
     private Handler handler = new Handler(){
         public void handleMessage(android.os.Message msg){
-
+            switch (msg.what){
+                case MSG_WHAT_SHOW_TIME:
+                    tvHour.setText(tenMSecond/360000+"");
+                    tvMinute.setText(tenMSecond/6000%60+"");
+                    tvSecond.setText(tenMSecond/100%60+"");
+                    tvMSecond.setText(tenMSecond%100+"");
+                    break;
+                default:
+                    break;
+            }
         }
     };
 
@@ -44,6 +53,12 @@ public class StopWatchView extends LinearLayout {
             timer.schedule(timerTask, 10, 10);
         }
     }
+    private void stopTimer(){
+        if (timerTask != null){
+            timerTask.cancel();
+            timerTask = null;
+        }
+    }
 
     @Override
     protected void onFinishInflate() {
@@ -58,22 +73,65 @@ public class StopWatchView extends LinearLayout {
         tvMSecond.setText("0");
 
         btnStart = findViewById(R.id.btnSWStart);
+        btnStart.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startTimer();
+                btnStart.setVisibility(View.GONE);
+                btnPause.setVisibility(View.VISIBLE);
+                btnLap.setVisibility(View.VISIBLE);
+            }
+        });
         btnPause = findViewById(R.id.btnSWPause);
+        btnPause.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopTimer();
+                btnPause.setVisibility(View.GONE);
+                btnResume.setVisibility(View.VISIBLE);
+                btnLap.setVisibility(View.GONE);
+                btnReset.setVisibility(View.VISIBLE);
+            }
+        });
         btnResume = findViewById(R.id.btnSWResume);
+        btnResume.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startTimer();
+                btnResume.setVisibility(View.GONE);
+                btnPause.setVisibility(View.VISIBLE);
+                btnReset.setVisibility(View.GONE);
+                btnLap.setVisibility(View.VISIBLE);
+            }
+        });
         btnLap = findViewById(R.id.btnSWLap);
+        btnLap.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.insert(String.format("%d:%d:%d.%d", tenMSecond/360000, tenMSecond/6000%60, tenMSecond/100%60, tenMSecond%100), 0);
+            }
+        });
         btnReset = findViewById(R.id.btnSWReset);
+        btnReset.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopTimer();
+                tenMSecond = 0;
+                adapter.clear();
+                btnPause.setVisibility(View.GONE);
+                btnResume.setVisibility(View.GONE);
+                btnLap.setVisibility(View.GONE);
+                btnReset.setVisibility(View.GONE);
+                btnStart.setVisibility(View.VISIBLE);
 
+            }
+        });
         btnPause.setVisibility(View.GONE);
         btnResume.setVisibility(View.GONE);
         btnLap.setVisibility(View.GONE);
         btnReset.setVisibility(View.GONE);
 
-        btnStart.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
 
         lvTimeList = findViewById(R.id.lvTimeList);
 
@@ -86,6 +144,10 @@ public class StopWatchView extends LinearLayout {
                 handler.sendEmptyMessage(MSG_WHAT_SHOW_TIME);
             }
         };
-        timer.schedule(showTimerTask, 200, 200);
+        timer.schedule(showTimerTask, 100, 100);
+    }
+
+    public void onDestroy() {
+        timer.cancel();
     }
 }

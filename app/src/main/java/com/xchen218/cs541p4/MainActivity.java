@@ -17,7 +17,15 @@ public class MainActivity extends AppCompatActivity {
         tabHost.addTab(tabHost.newTabSpec("tabStopWatch").setIndicator("StopWatch").setContent(R.id.tabStopWatch));
         tabHost.addTab(tabHost.newTabSpec("tabNotes").setIndicator("Notes").setContent(R.id.tabNotes));
 
+        stopWatchView = findViewById(R.id.tabStopWatch);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopWatchView.onDestroy();
+    }
+
+    private StopWatchView stopWatchView;
     private TabHost tabHost;
 }

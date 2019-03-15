@@ -224,11 +224,12 @@
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content">
-                        <TextView
+                        <EditText
                             android:id="@+id/tvNote"
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:gravity="center_horizontal"
+                            android:layout_weight="2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent" />
                         <Button
                             android:id="@+id/btnSave"
                             android:text="@string/Save"
